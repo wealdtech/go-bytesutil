@@ -83,3 +83,12 @@ func ToBytes96(val []byte) [96]byte {
 	copy(res[:], val)
 	return res
 }
+
+// XOR returns an XORd copy of the bytes.
+func XOR(data []byte) []byte {
+	res := make([]byte, len(data))
+	for i := range data {
+		res[i] = data[i] ^ 0xff
+	}
+	return res
+}
