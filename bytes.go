@@ -2,6 +2,8 @@ package bytesutil
 
 import (
 	"encoding/binary"
+	"encoding/hex"
+	"strings"
 )
 
 // Bytes1 returns the first byte of the little-endian representation of the supplied value.
@@ -82,6 +84,16 @@ func ToBytes96(val []byte) [96]byte {
 	var res [96]byte
 	copy(res[:], val)
 	return res
+}
+
+// FromHexString returns a byte array given a hex string
+func FromHexString(data string) ([]byte, error) {
+	data = strings.TrimPrefix(data, "0x")
+	if len(data)%2 == 1 {
+		// Odd number of characters; even it up
+		data = "0" + data
+	}
+	return hex.DecodeString(data)
 }
 
 // XOR returns an XORd copy of the bytes.
