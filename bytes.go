@@ -36,10 +36,15 @@ func Bytes32(x uint64) []byte {
 	return bytesN(x, 32)
 }
 
+// Bytes64 returns the first thirty-two bytes of the little-endian representation of the supplied value.
+func Bytes64(x uint64) []byte {
+	return bytesN(x, 64)
+}
+
 // bytesN returns the first n bytes of the little-endian represenation of the supplied value.
-// n must be <= 32
+// n must be <= 64
 func bytesN(val uint64, n uint) []byte {
-	bytes := make([]byte, 32)
+	bytes := make([]byte, 64)
 	binary.LittleEndian.PutUint64(bytes, val)
 	return bytes[:n]
 }
